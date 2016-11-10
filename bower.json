@@ -1,0 +1,26 @@
+{
+  "name": "code-snippet",
+  "homepage": "https://github.com/arnellebalane/code-snippet",
+  "authors": [
+    "Arnelle Balane <arnellebalane@gmail.com>"
+  ],
+  "description": "a polymer element for displaying syntax-highlighted code snippets",
+  "main": "code-snippet.html",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "code-snippet",
+    "syntax-highlight"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.0"
+  }
+}
