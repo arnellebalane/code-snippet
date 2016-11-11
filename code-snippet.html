@@ -5,10 +5,53 @@
 
 <dom-module id="code-snippet">
     <template>
+        <style>
+            :host {
+                @apply(--code-snippet);
+            }
+
+            pre {
+                margin: 0;
+            }
+
+            code {
+                padding: 2em;
+            }
+
+            footer {
+                padding: 0.55em 1.75em;
+                color: var(--code-snippet-details-color, #fff);
+                background-color: var(--code-snippet-details-background, #3f51b5);
+                @apply(--code-snippet-details);
+            }
+
+            span {
+                display: inline-block;
+            }
+
+            .language {
+                margin-right: 1em;
+                font-family: monospace;
+                font-weight: bold;
+                text-transform: uppercase;
+                @apply(--code-snippet-language);
+            }
+
+            .caption {
+                font-family: sans-serif;
+                font-size: 0.9em;
+                @apply(--code-snippet-caption);
+            }
+        </style>
+
         <iron-ajax auto url="[[source]]" handle-as="text" last-response="{{code}}"></iron-ajax>
 
         <link rel="stylesheet" href="[[_themeHref]]">
         <pre><code class$="[[language]]">[[code]]</code></pre>
+        <footer>
+            <span class="language">[[language]]</span>
+            <span class="caption">[[caption]]</span>
+        </footer>
     </template>
 
     <script>
@@ -21,6 +64,8 @@
                 source: String,
 
                 language: String,
+
+                caption: String,
 
                 code: {
                     type: String,
