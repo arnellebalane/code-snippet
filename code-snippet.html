@@ -90,7 +90,14 @@
             },
 
             _codePropertyChanged: function() {
-                hljs.highlightBlock(this.querySelector('code'));
+                var code = this.querySelector('code')
+                hljs.highlightBlock(code);
+
+                var spans = Array.prototype.slice.call(code);
+                spans.forEach(function(span) {
+                    span.style.whiteSpace = 'pre-wrap';
+                    span.style.wordWrap = 'break-word';
+                });
             }
         });
     </script>
