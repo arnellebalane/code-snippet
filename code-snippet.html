@@ -47,7 +47,7 @@
 
         <iron-ajax auto url="[[source]]" handle-as="text" last-response="{{code}}"></iron-ajax>
 
-        <link rel="stylesheet" href="[[_themeHref]]">
+        <link rel="stylesheet" id="stylesheet">
         <pre><code class$="[[language]]">[[code]]</code></pre>
         <footer>
             <span class="language">[[language]]</span>
@@ -80,7 +80,8 @@
 
                 _themeHref: {
                     type: String,
-                    computed: '_computeThemeHrefProperty(theme)'
+                    computed: '_computeThemeHrefProperty(theme)',
+                    observer: '_themeHrefPropertyChanged'
                 }
             },
 
@@ -98,6 +99,10 @@
                     span.style.whiteSpace = 'pre-wrap';
                     span.style.wordWrap = 'break-word';
                 });
+            },
+
+            _themeHrefPropertyChanged: function() {
+                this.$.stylesheet.href = this._themeHref;
             }
         });
     </script>
