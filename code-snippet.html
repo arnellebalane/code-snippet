@@ -47,8 +47,7 @@
 
         <iron-ajax auto url="[[source]]" handle-as="text" last-response="{{code}}"></iron-ajax>
 
-        <link rel="stylesheet" id="stylesheet">
-        <pre><code class$="[[language]]">[[code]]</code></pre>
+        <pre id="codesnippet"><code class$="[[language]]">[[code]]</code></pre>
         <footer>
             <span class="language">[[language]]</span>
             <span class="caption">[[caption]]</span>
@@ -57,6 +56,7 @@
 
     <script>
         var rootUrl = new URL(document.currentScript.ownerDocument.baseURI);
+        console.log(rootUrl);
 
         Polymer({
             is: 'code-snippet',
@@ -86,7 +86,7 @@
             },
 
             _computeThemeHrefProperty: function() {
-                var themeUrl = new URL('../highlightjs/styles/' + this.theme + '.css', rootUrl);
+                var themeUrl = new URL('/bower_components/highlightjs/styles/' + this.theme + '.css', rootUrl);
                 return themeUrl.href;
             },
 
@@ -102,7 +102,15 @@
             },
 
             _themeHrefPropertyChanged: function() {
-                this.$.stylesheet.href = this._themeHref;
+                var oldLink = this.querySelector('link');
+                if (oldLink) {
+                    this.removeChild(oldLink);
+                }
+
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = this._themeHref;
+                this.insertBefore(link, this.$.codesnippet);
             }
         });
     </script>
